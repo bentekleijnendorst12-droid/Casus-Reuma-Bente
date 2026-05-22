@@ -4,6 +4,7 @@ casus reuma
 
 
 Intestinal immune network for IgA production: hsa04672.
+
 In darmen, beetje raar maar relevant. Nieuwe onderzoeken denken dat de eerste tekeken van Reuma in de darmen te zien zijn. Het ontstoken gewrichtsslijmvlies gaat zich ook gedragen als lymfeklier/slijmvlies maar dan dus in gewricht ipv darmen. In een gezond gewricht horen bijna geen b cellen te zijn. Bij reuma wel. te zien in pathway
 
 Gemini:
