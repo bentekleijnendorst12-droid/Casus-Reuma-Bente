@@ -12,7 +12,7 @@ library('Rsubread')
 #indexeren
 buildindex(
   basename = 'ref_human',
-  reference = 'GCF_000005845.2_ASM584v2_genomic.fna',
+  reference = 'GCF_000001405.40_GRCh38.p14_genomic.fna',
   memory = 4000,
   indexSplit = TRUE)
 
@@ -42,7 +42,7 @@ count_matrix <- featureCounts(
 counts <- count_matrix$counts
 
 # de counts van de countmatrix nieuwe kolomnamen geven
-colnames(counts) <- c("norm1", "norm2", "norm3", "norm41", "reuma1", "reuma2", "reuma3", "reuma4")
+colnames(counts) <- c("norm1", "norm2", "norm3", "norm4", "reuma1", "reuma2", "reuma3", "reuma4")
 head(counts)
 
 #opslaan
@@ -64,12 +64,12 @@ library(pathview)
 # colnames geven
 colnames(echtedata) <- c("norm1", "norm2", "norm3", "norm4", "reuma1", "reuma2", "reuma3", "reuma4")
 
+#rijnamen geven
+rownames(Status_table)=c("norm1", "norm2", "norm3", "norm4", "reuma1", "reuma2", "reuma3", "reuma4")
+
 # metadata
 Status=c ("Gezond", "Gezond", "Gezond", "Gezond", "Reuma", "Reuma", "Reuma", "Reuma")
 Status_table= data.frame(Status)
-
-#rijnamen
-rownames(Status_table)=c("norm1", "norm2", "norm3", "norm4", "reuma1", "reuma2", "reuma3", "reuma4")
 
 #desseq dataset
 ddsR = DESeqDataSetFromMatrix(countData = echtedata,
@@ -155,10 +155,10 @@ class(GO.wall)
 head(GO.wall)
 nrow(GO.wall)
 
-#kijken welke enriched stat sig is
+#kijken welke enriched statistisch significant is
 enriched.GO=GO.wall$category[GO.wall$over_represented_pvalue<.05]
 
-#hoeveel go termen nu
+#kijken hoeveel GO termen er overblijven
 class(enriched.GO)
 head(enriched.GO)
 length(enriched.GO)
@@ -203,7 +203,7 @@ ggplot(top10_GO, aes(x = numInCat/numDEInCat, y =  reorder(category, -numInCat/n
   ) +
   theme_minimal()
 
-#pathway visualiseren
+#pathway visualisatie
 ALLtabel[1]=NULL
 ALLtabel[2:5]=NULL
 
