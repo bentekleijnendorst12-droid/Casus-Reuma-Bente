@@ -192,7 +192,7 @@ ggplot(top10_GO, aes(x = log_p, y = category)) +
   theme(axis.text.y = element_text(size = 10))
 
 #bar plot is beter
-#Maak de bar chart
+#Maak de bar plot
 ggplot(top10_GO, aes(x = numInCat/numDEInCat, y = reorder(term, -numInCat/numDEInCat), fill = ontology)) +
   geom_bar(stat = "identity") +
   scale_y_discrete(labels = function(x) str_wrap(x, width = 30)) + 
