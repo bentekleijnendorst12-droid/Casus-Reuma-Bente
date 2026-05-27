@@ -170,7 +170,7 @@ BiocManager::install("pathview")
 library(pathview)
 
 #Selecteer de top 10 meest significante pathways en bereken -log10(p-waarde)
-top10_GO <- GO.wall %>%
+top10_GO = GO.wall %>%
   arrange(over_represented_pvalue) %>%
   head(10) %>%
   mutate(log_p = -log10(over_represented_pvalue),
@@ -193,15 +193,24 @@ ggplot(top10_GO, aes(x = log_p, y = category)) +
 
 #bar plot is beter
 #Maak de bar chart
-ggplot(top10_GO, aes(x = numInCat/numDEInCat, y =  reorder(category, -numInCat/numDEInCat), fill = ontology)) +
+ggplot(top10_GO, aes(x = numInCat/numDEInCat, y = reorder(term, -numInCat/numDEInCat), fill = ontology)) +
   geom_bar(stat = "identity") +
+  scale_y_discrete(labels = function(x) str_wrap(x, width = 30)) + 
   labs(
     title = "Top 10 Meest Significante GO Termen",
-    x = "Verhouding genexpressie Reuma en Gezond",
+    x = "Omvang pathway per DE gen (numInCat/numDEInCat)",
     y = "GO Term",
-    fill = "Ontologie"
-  ) +
-  theme_minimal()
+    fill = "Ontologie" ) +
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 9))
+
+#afbeelding opslaan
+  dev.copy(png, 'Top10MeestSignificanteGOtermen.png', 
+         width = 12,      
+         height = 7,      
+         units = 'in',
+         res = 500)
+dev.off()
 
 #pathway visualisatie
 ALLtabel[1]=NULL
@@ -213,4 +222,5 @@ pathview(
   species = "hsa",          
   gene.idtype = "SYMBOL",     
   limit = list(gene = 5))
+
 
