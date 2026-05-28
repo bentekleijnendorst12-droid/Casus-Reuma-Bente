@@ -99,7 +99,9 @@ laagste_p_waardeR
 EnhancedVolcano(resultatenR,
                 lab = rownames(resultatenR),
                 x = 'log2FoldChange',
-                y = 'padj')
+                y = 'padj',
+                col = c("slategrey", "turquoise4", "red", "seagreen4"),
+                legendLabels=c('Not sig.', expression(log[2] ~ "Foldchange"),"p-waarde",expression(p<0.05~ "&"~ log[2] ~ "Foldchange" )))
 
 #figuur opslaan
 dev.copy(png, 'VolcanoplotCasus.png', 
@@ -193,14 +195,23 @@ ggplot(top10_GO, aes(x = log_p, y = category)) +
 
 #bar plot is beter
 #Maak de bar plot
-ggplot(top10_GO, aes(x = numInCat/numDEInCat, y = reorder(term, -numInCat/numDEInCat), fill = ontology)) +
+ggplot(top10_GO, aes(x = numDEInCat/numInCat, y = reorder(term, numDEInCat/numInCat), fill = ontology)) +
   geom_bar(stat = "identity") +
   scale_y_discrete(labels = function(x) str_wrap(x, width = 30)) + 
   labs(
     title = "Top 10 Meest Significante GO Termen",
-    x = "Omvang pathway per DE gen (numInCat/numDEInCat)",
+    x = "Gen ratio database tot DE-genen (numDEInCat/numInCat)",
     y = "GO Term",
     fill = "Ontologie" ) +
+  scale_fill_manual(
+    values = c(
+      "BP" = "turquoise4", 
+      "CC" = "maroon4", 
+      "MF" = "royalblue3"),
+    labels = c(
+      "BP" = "Biological Process", 
+      "CC" = "Cellular Component", 
+      "MF" = "Molecular Function"))
   theme_minimal() +
   theme(axis.text.y = element_text(size = 9))
 
