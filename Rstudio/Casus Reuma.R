@@ -54,8 +54,6 @@ echtedata=read.table("count_matrix_RA.txt", header = TRUE, row.names = 1)
 #packages inladen
 BiocManager::install("DESeq2")
 library(DESeq2)
-BiocManager::install("KEGGREST")
-library(KEGGREST)
 BiocManager::install("EnhancedVolcano")
 library(EnhancedVolcano)
 BiocManager::install("pathview")
