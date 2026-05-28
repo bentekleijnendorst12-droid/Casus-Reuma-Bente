@@ -216,7 +216,7 @@ ggplot(top10_GO, aes(x = numDEInCat/numInCat, y = reorder(term, numDEInCat/numIn
   theme(axis.text.y = element_text(size = 9))
 
 #afbeelding opslaan
-  dev.copy(png, 'Top10MeestSignificanteGOtermen.png', 
+dev.copy(png, 'Top10MeestSignificanteGOtermen.png', 
          width = 12,      
          height = 7,      
          units = 'in',
