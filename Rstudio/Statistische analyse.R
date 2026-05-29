@@ -9,3 +9,7 @@ ddsR = DESeqDataSetFromMatrix(countData = echtedata,
 ddsR = DESeq(ddsR)
 resultatenR= results(ddsR)
 resultatenR
+
+# sorteren
+sum(resultatenR$padj < 0.05 & resultatenR$log2FoldChange > 1, na.rm = TRUE)
+sum(resultatenR$padj < 0.05 & resultatenR$log2FoldChange < -1, na.rm = TRUE)
